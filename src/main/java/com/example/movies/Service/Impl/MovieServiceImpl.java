@@ -42,16 +42,17 @@ public class MovieServiceImpl implements MovieService {
         try {
 
             Pageable pagination = PageRequest.of(page - 1, totalData, Sort.by("id").descending());
-            Page movieList = movieRepository.findAll(pagination);
+            Page<Movie> movieList = movieRepository.findAll(pagination);
 
-            if (movieList.isEmpty()) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Movie list Empty");
+            if (movieList.getContent().isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, DATA_EMPTY);
             }
-
             BaseResponseDTO.Paging paging = new BaseResponseDTO.Paging(movieList.getTotalElements(), movieList.getTotalPages(), movieList.getSize());
+
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(ResponseHelper.successResponseWithPaging(movieList.getContent(), paging, SUCCESS_GET_MOVIE));
+
         } catch (ResponseStatusException ex) {
             return ResponseEntity
                     .status(HttpStatus.OK)

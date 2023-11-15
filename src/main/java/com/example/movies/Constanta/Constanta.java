@@ -2,6 +2,12 @@ package com.example.movies.Constanta;
 
 public class Constanta {
 
+//    Return
+    public static final String DATA_EMPTY = "Data Empty";
+
+
+//    Action Message
+
     public static final String SUCCESS_GET_ALL_CATEGORIES = "Success Get All Categories..";
     public static final String SUCCESS_GET_ALL_AUTHOR = "Success Get All Author..";
     public static final String SUCCESS_GET_MOVIE = "Success Get Movies";
