@@ -41,8 +41,8 @@ public class MovieServiceImpl implements MovieService {
     public ResponseEntity<Object> getMovie(Integer page, Integer totalData) {
         try {
 
-            Pageable pagination = PageRequest.of(page - 1, totalData, Sort.by("id").descending());
-            Page movieList = movieRepository.findAll(pagination);
+            Pageable pagination = PageRequest.of(page - 1, totalData, Sort.by("movieId").descending());
+            Page movieList = movieRepository.findAllActiveMovie(pagination);
 
             if (movieList.isEmpty()) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Movie list Empty");
@@ -77,5 +77,31 @@ public class MovieServiceImpl implements MovieService {
                     .badRequest()
                     .body(ResponseHelper.failResponse(CONTACT_DEVELOPER));
         }
+    }
+
+    @Override
+    public ResponseEntity<Object> getMovieBySearch(Integer movieId) {
+
+        Movie findMovie = movieRepository.findMovieByName(movieId).get();
+
+        return ResponseEntity
+                .ok().body(ResponseHelper.successResponse(findMovie, SUCCESS_GET_MOVIE));
+    }
+
+    @Override
+    public ResponseEntity<Object> deleteUser(Integer movieId) {
+        try {
+            Movie data = movieRepository.findActiveMovieById(movieId);
+            if(data == null){
+                return ResponseEntity.badRequest().body(ResponseHelper.failResponse("USER NOT FOUND OR DELETED"));
+            }
+            data.setIsActive(false);
+            movieRepository.save(data);
+            return ResponseEntity.ok().body(ResponseHelper.successResponse(data, "SUCCESS DELETE MOVIE"));
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return ResponseEntity.ok().body(ResponseHelper.failResponse("FAIL DELETE MOVIE"));
+        }
+
     }
 }

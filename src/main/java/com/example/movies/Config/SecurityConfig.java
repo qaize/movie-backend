@@ -40,7 +40,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(requests -> requests
                 .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken","/auth/user/**","/auth/admin/**").permitAll()
-                .requestMatchers("/api/**").permitAll()
+                .requestMatchers("/api/**").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);

@@ -6,6 +6,7 @@ import com.example.movies.Helper.BindingHelper;
 import com.example.movies.Service.Impl.AuthorServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,8 @@ public class AuthorController {
     @Autowired
     private AuthorServiceImpl authorService;
 
-    @GetMapping("/get-all-author")
+    @GetMapping(path = "/get-all-author",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public ResponseEntity<Object>getAllAuthor(){
         return authorService.getAllAuthor();
     }

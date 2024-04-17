@@ -20,8 +20,7 @@ public class UserInfoDetails implements UserDetails {
     public UserInfoDetails(UserInfo userInfo) {
         name = userInfo.getName();
         password = userInfo.getPassword();
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_".concat(userInfo.getRole()).toUpperCase()));
     }
 
     @Override
