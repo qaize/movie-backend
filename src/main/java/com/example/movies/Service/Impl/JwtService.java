@@ -1,6 +1,7 @@
 package com.example.movies.Service.Impl;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -65,7 +66,10 @@ public class JwtService {
 
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+
+        var expireStatus = isTokenExpired(token);
+
+        return (username.equals(userDetails.getUsername()) && !expireStatus);
     }
 
 
