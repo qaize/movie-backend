@@ -1,6 +1,7 @@
 package com.example.movies.Service.Impl;
 
 import com.example.movies.DAO.AuthorRepository;
+import com.example.movies.DTO.Response.BaseResponseDTO;
 import com.example.movies.Entity.Author;
 import com.example.movies.Helper.ResponseHelper;
 import com.example.movies.Service.AuthorService;
@@ -23,29 +24,23 @@ public class AuthorServiceImpl implements AuthorService {
 
 
     @Override
-    public ResponseEntity<Object> getAllAuthor() {
+    public BaseResponseDTO<Object> getAllAuthor() {
         try {
             var listAuthor = authorRepository.findAll();
-            return ResponseEntity
-                    .ok()
-                    .body(ResponseHelper.successResponse(listAuthor,SUCCESS_GET_ALL_AUTHOR));
+            return ResponseHelper.successResponse(listAuthor,SUCCESS_GET_ALL_AUTHOR);
         }catch (Exception e){
-            return ResponseEntity
-                    .badRequest()
-                    .body(ResponseHelper.failResponse(e.getMessage()));
+            return ResponseHelper.failResponse(e.getMessage());
         }
     }
 
     @Override
-    public ResponseEntity<Object> insertAuthor(Author author) {
+    public BaseResponseDTO<Object> insertAuthor(Author author) {
 
         try {
             authorRepository.save(author);
-            return ResponseEntity.ok().body(ResponseHelper.successResponse(author,SUCCESS_INSERT_AUTHOR));
+            return ResponseHelper.successResponse(author,SUCCESS_INSERT_AUTHOR);
         }catch (Exception e){
-            return ResponseEntity
-                    .badRequest()
-                    .body(ResponseHelper.failResponse(e.getMessage()));
+            return ResponseHelper.failResponse(e.getMessage());
         }
     }
 }

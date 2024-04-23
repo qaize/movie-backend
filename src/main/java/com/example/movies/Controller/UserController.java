@@ -1,7 +1,9 @@
 package com.example.movies.Controller;
 
 import com.example.movies.DTO.Request.AuthRequest;
+import com.example.movies.DTO.Response.BaseResponseDTO;
 import com.example.movies.Entity.UserInfo;
+import com.example.movies.Helper.ResponseHelper;
 import com.example.movies.Service.Impl.JwtService;
 import com.example.movies.Service.Impl.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +50,10 @@ public class UserController {
     }
 
     @PostMapping("/generateToken")
-    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+    public BaseResponseDTO<Object> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(authRequest.getUsername());
+            return ResponseHelper.successResponse(jwtService.generateToken(authRequest.getUsername()),"Success generate token");
         } else {
             throw new UsernameNotFoundException("invalid user request !");
         }

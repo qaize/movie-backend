@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface CategoriesService {
 
-    ResponseEntity<Object> getAllCategories();
-    ResponseEntity<Object> insertCategories(Categories categories);
+    BaseResponseDTO<Object> getAllCategories();
+    BaseResponseDTO<Object> insertCategories(Categories categories);
 }

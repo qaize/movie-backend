@@ -2,6 +2,7 @@ package com.example.movies.Controller;
 
 
 import com.example.movies.DTO.Request.PaginationDTO;
+import com.example.movies.DTO.Response.BaseResponseDTO;
 import com.example.movies.DTO.Response.MovieDTO;
 import com.example.movies.Entity.Movie;
 import com.example.movies.Helper.BindingHelper;
@@ -25,17 +26,17 @@ public class MovieController {
     ObjectMapper objectMapper;
 
     @PostMapping(value = "/all-movie")
-    public ResponseEntity<Object> allMovie(@RequestBody PaginationDTO paginationDTO) {
+    public BaseResponseDTO<Object> allMovie(@RequestBody PaginationDTO paginationDTO) {
         return movieService.getMovie(paginationDTO.getPage(), paginationDTO.getTotalData());
     }
 
     @PostMapping(path = "/get-movie")
-    public ResponseEntity<Object>searchMovie(@RequestBody MovieDTO  movie) throws JsonProcessingException {
+    public BaseResponseDTO<Object> searchMovie(@RequestBody MovieDTO  movie) throws JsonProcessingException {
         return movieService.getMovieBySearch(movie.getId());
     }
 
     @PostMapping(value = "/insert")
-    public ResponseEntity<Object> insert(@Valid @RequestBody Movie movie, BindingResult bindingResult) {
+    public BaseResponseDTO<Object> insert(@Valid @RequestBody Movie movie, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             return movieService.insertMovie(movie);
         }
@@ -43,7 +44,7 @@ public class MovieController {
     }
 
     @DeleteMapping(path = "/delete")
-    public ResponseEntity<Object>delete(@RequestBody MovieDTO movie){
+    public BaseResponseDTO<Object>delete(@RequestBody MovieDTO movie){
         return movieService.deleteUser(movie.getId());
     }
 }

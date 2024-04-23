@@ -1,6 +1,7 @@
 package com.example.movies.Controller;
 
 
+import com.example.movies.DTO.Response.BaseResponseDTO;
 import com.example.movies.Entity.Author;
 import com.example.movies.Helper.BindingHelper;
 import com.example.movies.Service.Impl.AuthorServiceImpl;
@@ -20,12 +21,12 @@ public class AuthorController {
 
     @GetMapping(path = "/get-all-author",consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Object>getAllAuthor(){
+    public BaseResponseDTO<Object>getAllAuthor(){
         return authorService.getAllAuthor();
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<Object>insert(@Valid @RequestBody Author author, BindingResult bindingResult){
+    public BaseResponseDTO<Object> insert(@Valid @RequestBody Author author, BindingResult bindingResult){
         if(!bindingResult.hasErrors()){
             return authorService.insertAuthor(author);
         }

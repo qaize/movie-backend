@@ -1,6 +1,8 @@
 package com.example.movies.Helper;
 
 import com.example.movies.DTO.BindingErrorDTO;
+import com.example.movies.DTO.Response.BaseResponseDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -13,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class BindingHelper {
 
-    public static ResponseEntity<Object> mapBindingErrors(BindingResult bindingResult) {
+    public static BaseResponseDTO<Object> mapBindingErrors(BindingResult bindingResult) {
         List<FieldError>errorFields = bindingResult.getFieldErrors();
 
         Collection<BindingErrorDTO> listError = errorFields.stream().map(fieldError -> BindingErrorDTO.builder()
@@ -21,6 +23,6 @@ public class BindingHelper {
                 .message(fieldError.getDefaultMessage())
                 .build()).collect(Collectors.toList());
 
-        return ResponseEntity.badRequest().body(listError);
+        return ResponseHelper.failResponse("BAD REQUEST", HttpStatus.BAD_REQUEST,listError);
     }
 }
