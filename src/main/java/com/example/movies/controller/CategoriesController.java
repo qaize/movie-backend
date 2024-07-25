@@ -5,16 +5,17 @@ import com.example.movies.entity.Categories;
 import com.example.movies.helper.BindingHelper;
 import com.example.movies.service.impl.CategoriesServiceImpl;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/categories")
+@RequiredArgsConstructor
 public class CategoriesController {
 
-    @Autowired
-    private CategoriesServiceImpl categoriesService;
+    private final CategoriesServiceImpl categoriesService;
 
     @GetMapping(value = "/get-all-categories")
     public BaseResponseDTO<Object> getAllCategory(){

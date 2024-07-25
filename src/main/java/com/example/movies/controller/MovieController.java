@@ -10,19 +10,17 @@ import com.example.movies.service.impl.MovieServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/movie")
+@RequiredArgsConstructor
 public class MovieController {
 
-    @Autowired
-    private MovieServiceImpl movieService;
-
-    @Autowired
-    ObjectMapper objectMapper;
+    private final MovieServiceImpl movieService;
 
     @PostMapping(value = "/all-movie")
     public BaseResponseDTO<Object> allMovie(@RequestBody PaginationDTO paginationDTO) {

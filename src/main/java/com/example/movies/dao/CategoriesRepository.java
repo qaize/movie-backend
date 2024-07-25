@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-@Transactional
 public interface CategoriesRepository extends JpaRepository<Categories,Integer> {
 
     Optional<Categories> findByCategory(String category);

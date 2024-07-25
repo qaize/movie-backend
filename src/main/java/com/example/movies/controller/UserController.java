@@ -6,6 +6,7 @@ import com.example.movies.entity.UserInfo;
 import com.example.movies.helper.ResponseHelper;
 import com.example.movies.service.impl.JwtService;
 import com.example.movies.service.impl.UserInfoService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,16 +17,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserInfoService service;
+    private final UserInfoService service;
 
-    @Autowired
-    private JwtService jwtService;
+    private final JwtService jwtService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
     @GetMapping("/welcome")
     public String welcome() {
