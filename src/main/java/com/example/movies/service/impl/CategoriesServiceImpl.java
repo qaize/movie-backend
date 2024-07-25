@@ -6,6 +6,7 @@ import com.example.movies.entity.Categories;
 import com.example.movies.exception.ProcessException;
 import com.example.movies.helper.ResponseHelper;
 import com.example.movies.service.CategoriesService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +17,10 @@ import static com.example.movies.constanta.Constanta.SUCCESS_GET_ALL_CATEGORIES;
 import static com.example.movies.constanta.Constanta.SUCCESS_INSERT_CATEGORIES;
 
 @Service
+@RequiredArgsConstructor
 public class CategoriesServiceImpl implements CategoriesService {
 
-    private CategoriesRepository categoriesRepository;
-
-    @Autowired
-    public CategoriesServiceImpl(CategoriesRepository categoriesRepository) {
-        this.categoriesRepository = categoriesRepository;
-    }
+    private final CategoriesRepository categoriesRepository;
 
     @Override
     public BaseResponseDTO<Object> getAllCategories() {

@@ -3,6 +3,7 @@ package com.example.movies.service.impl;
 import com.example.movies.config.UserInfoDetails;
 import com.example.movies.dao.UserInfoRepository;
 import com.example.movies.entity.UserInfo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,13 +14,12 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserInfoService implements UserDetailsService {
 
-    @Autowired
-    private UserInfoRepository userInfoRepository;
+    private final UserInfoRepository userInfoRepository;
 
-    @Autowired
-    private PasswordEncoder encoder;
+    private final PasswordEncoder encoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

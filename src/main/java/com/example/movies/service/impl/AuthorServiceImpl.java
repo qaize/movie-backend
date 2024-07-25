@@ -5,6 +5,7 @@ import com.example.movies.dto.response.BaseResponseDTO;
 import com.example.movies.entity.Author;
 import com.example.movies.helper.ResponseHelper;
 import com.example.movies.service.AuthorService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +13,10 @@ import static com.example.movies.constanta.Constanta.SUCCESS_GET_ALL_AUTHOR;
 import static com.example.movies.constanta.Constanta.SUCCESS_INSERT_AUTHOR;
 
 @Service
+@RequiredArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
-
-    @Autowired
-    public AuthorServiceImpl (AuthorRepository authorRepository){
-        this.authorRepository = authorRepository;
-    }
-
 
     @Override
     public BaseResponseDTO<Object> getAllAuthor() {

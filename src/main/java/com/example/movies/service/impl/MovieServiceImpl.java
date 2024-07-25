@@ -7,6 +7,7 @@ import com.example.movies.entity.Movie;
 import com.example.movies.helper.pagemapper.PageMapper;
 import com.example.movies.helper.ResponseHelper;
 import com.example.movies.service.MovieService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +24,11 @@ import java.util.Optional;
 import static com.example.movies.constanta.Constanta.*;
 
 @Service
+@RequiredArgsConstructor
 public class MovieServiceImpl implements MovieService {
-
 
     private final Logger LOGGER = LoggerFactory.getLogger(MovieServiceImpl.class);
     private final MovieRepository movieRepository;
-
-    @Autowired
-    public MovieServiceImpl(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
-    }
-
 
     @Override
     public BaseResponseDTO<Object> getMovie(Integer page, Integer totalData) {
