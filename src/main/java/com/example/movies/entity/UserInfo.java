@@ -5,9 +5,10 @@ import lombok.*;
 
 @Entity
 @Table(name = "account")
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
 public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

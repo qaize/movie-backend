@@ -3,8 +3,8 @@ package com.example.movies.dto.response;
 import lombok.*;
 
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
+@Builder
 @NoArgsConstructor
 public class MovieDTO {
     private Integer id;

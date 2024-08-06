@@ -14,12 +14,13 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class UserInfoService implements UserDetailsService {
 
-    private final UserInfoRepository userInfoRepository;
+    @Autowired
+    private UserInfoRepository userInfoRepository;
 
-    private final PasswordEncoder encoder;
+    @Autowired
+    private  PasswordEncoder encoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
