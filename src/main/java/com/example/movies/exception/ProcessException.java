@@ -15,6 +15,10 @@ public class ProcessException extends RuntimeException {
         generateResponse(message,null,null);
     }
 
+    public <T> ProcessException(HttpStatus status,String message) {
+        generateResponse(message,status,null);
+    }
+
     public <T> void generateResponse(String message, HttpStatus httpStatus, T result) {
 
 

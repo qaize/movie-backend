@@ -28,7 +28,7 @@ public class MovieController {
     }
 
     @PostMapping(path = "/get-movie")
-    public BaseResponseDTO<Object> searchMovie(@RequestBody MovieDTO  movie) throws JsonProcessingException {
+    public BaseResponseDTO<Object> searchMovie(@Valid @RequestBody MovieDTO  movie) throws JsonProcessingException {
         return movieService.getMovieBySearch(movie.getId());
     }
 

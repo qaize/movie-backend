@@ -7,7 +7,6 @@ import com.example.movies.helper.BindingHelper;
 import com.example.movies.service.impl.AuthorServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +17,7 @@ public class AuthorController {
 
     private final AuthorServiceImpl authorService;
 
-    @GetMapping(path = "/get-all-author",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/get-all-author")
     public BaseResponseDTO<Object>getAllAuthor(){
         return authorService.getAllAuthor();
     }

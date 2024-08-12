@@ -1,16 +1,17 @@
 package com.example.movies.service.impl;
 
-import com.example.movies.dao.CategoriesRepository;
+import com.example.movies.dao.CategoryRepository;
 import com.example.movies.dto.response.BaseResponseDTO;
 import com.example.movies.entity.Categories;
 import com.example.movies.exception.ProcessException;
 import com.example.movies.helper.ResponseHelper;
-import com.example.movies.service.CategoriesService;
+import com.example.movies.service.CategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.example.movies.constanta.Constanta.SUCCESS_GET_ALL_CATEGORIES;
@@ -18,14 +19,14 @@ import static com.example.movies.constanta.Constanta.SUCCESS_INSERT_CATEGORIES;
 
 @Service
 @RequiredArgsConstructor
-public class CategoriesServiceImpl implements CategoriesService {
+public class CategoryServiceImpl implements CategoryService {
 
-    private final CategoriesRepository categoriesRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public BaseResponseDTO<Object> getAllCategories() {
         try {
-            List<Categories> categoriesList = categoriesRepository.findAll();
+            List<Categories> categoriesList = categoryRepository.findAll();
 
             return ResponseHelper.successResponse(categoriesList, SUCCESS_GET_ALL_CATEGORIES);
         } catch (Exception e) {
@@ -37,13 +38,13 @@ public class CategoriesServiceImpl implements CategoriesService {
     public BaseResponseDTO<Object> insertCategories(Categories categories) {
 
 
-        Optional<Categories> data = categoriesRepository.findByCategory(categories.getCategory());
+        Optional<Categories> data = categoryRepository.findByCategory(categories.getCategory());
 
         if (data.isPresent()) {
             throw new ProcessException("Data already Registered");
         }
 
-        categoriesRepository.save(categories);
+        categoryRepository.save(categories);
         return ResponseHelper.successResponse(categories, SUCCESS_INSERT_CATEGORIES);
 
     }
